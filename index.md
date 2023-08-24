@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Test Blog
+title: Student Blog
 ---
 
 
