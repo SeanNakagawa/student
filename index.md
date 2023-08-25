@@ -1,7 +1,5 @@
----
-layout: default
-title: Student Blog
----
+Sean's Blog
+
 
 
 ## Build you Home Page here 
