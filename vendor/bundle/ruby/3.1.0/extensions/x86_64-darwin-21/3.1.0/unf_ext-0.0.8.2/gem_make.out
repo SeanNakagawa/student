@@ -1,0 +1,17 @@
+current directory: /Users/Sean/vscode/student/vendor/bundle/ruby/3.1.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+/Users/Sean/.rbenv/versions/3.1.4/bin/ruby -I /Users/Sean/.rbenv/versions/3.1.4/lib/ruby/3.1.0 extconf.rb
+checking for -lstdc++... yes
+creating Makefile
+
+current directory: /Users/Sean/vscode/student/vendor/bundle/ruby/3.1.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\= sitearchdir\=./.gem.20230825-41006-k30476 sitelibdir\=./.gem.20230825-41006-k30476 clean
+
+current directory: /Users/Sean/vscode/student/vendor/bundle/ruby/3.1.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\= sitearchdir\=./.gem.20230825-41006-k30476 sitelibdir\=./.gem.20230825-41006-k30476
+compiling unf.cc
+linking shared-object unf_ext.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/Sean/vscode/student/vendor/bundle/ruby/3.1.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\= sitearchdir\=./.gem.20230825-41006-k30476 sitelibdir\=./.gem.20230825-41006-k30476 install
+/usr/bin/install -c -m 0755 unf_ext.bundle ./.gem.20230825-41006-k30476
