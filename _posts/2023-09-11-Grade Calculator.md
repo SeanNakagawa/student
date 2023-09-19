@@ -32,36 +32,31 @@ courses: { csse: {week: 4} }
         <h1>Grade Calculator</h1>
         <h2>Input scores, press tab to add each new number.</h2>
     </header>
-    <section>
-        <h3>
-            Total: <span id="total">0.0</span>
-            Count: <span id="count">0.0</span>
-            Average: <span id="average">0.0</span>
-        </h3>
-        <div id="scores">
+    <table>
+        <tr>
+            <th>Total: <span id="total">0.0</span></th>
+            <th>Count: <span id="count">0.0</span></th>
+            <th>Average: <span id="average">0.0</span></th>
+        </tr>
+        <tbody id="scores">
             <!-- JavaScript-generated input boxes will appear here -->
-        </div>
-    </section>
+        </tbody>
+    </table>
     <script>
         // Function to create a new input box
         function newInputLine(index) {
-            const scoresDiv = document.getElementById("scores");
-            // Create and append a label for each score element
-            const title = document.createElement('label');
-            title.setAttribute('for', index);
-            title.textContent = index + ". ";
-            scoresDiv.appendChild(title);
             // Create and configure the score input element
             const score = document.createElement("input");
-            score.setAttribute('id', index);
+            score.setAttribute('id', `score${index}`);
             score.setAttribute('type', "number");
             score.setAttribute('name', "score");
             score.setAttribute('style', "text-align: right; width: 5em");
             score.setAttribute('onkeydown', "calculator(event)");
-            scoresDiv.appendChild(score);
-            // Create and append a line break after the input box
-            const br = document.createElement("br");
-            scoresDiv.appendChild(br);
+            // Append the new input box to the "scores" tbody
+            const scoresTBody = document.getElementById("scores");
+            const newRow = scoresTBody.insertRow();
+            const cell = newRow.insertCell();
+            cell.appendChild(score);
             // Set focus on the new input line
             score.focus();
         }
@@ -85,14 +80,12 @@ courses: { csse: {week: 4} }
                 document.getElementById('total').textContent = total.toFixed(2); // Show two decimals
                 document.getElementById('count').textContent = count;
                 document.getElementById('average').textContent = (count > 0) ? (total / count).toFixed(2) : "0.0";
-                // Add a new input line if all array values are valid
-                if (count === scoreInputs.length) {
-                    newInputLine(count);
-                }
+                // Add a new input line
+                newInputLine(scoreInputs.length + 1);
             }
         }
         // Create the first input box on window load
-        newInputLine(0);
+        newInputLine(1);
     </script>
 </body>
 </html>

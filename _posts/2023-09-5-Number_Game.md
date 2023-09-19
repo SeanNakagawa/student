@@ -12,27 +12,44 @@ courses: { csse: {week: 3} }
 
 Guess the number 1-100
 
-<details>
-  <summary>Guess the Number Input</summary>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess the Number Game</title>
+  <style>
+    /* Add some CSS styling here if needed */
+  </style>
+</head>
+<body>
 
-  <!-- Replace this with your own input field code if you have a web page or platform to host it -->
-  <input type="text" id="guessInput" placeholder="Enter your guess...">
-  <button onclick="checkGuess()">Submit</button>
+<div class="game-container">
+  <h1>Guess the Number Game</h1>
+  <p>Try to guess the number between 1 and 100.</p>
 
-  <p id="message"></p>
-</details>
+  <details>
+    <summary>Guess the Number Input</summary>
+
+    <div class="input-container">
+      <input type="text" id="guessInput" placeholder="Enter your guess...">
+      <button onclick="checkGuess()">Submit</button>
+    </div>
+
+    <p id="message"></p>
+  </details>
+</div>
 
 <script>
   // JavaScript code to handle the game logic
   const randomNumber = Math.floor(Math.random() * 100) + 1;
-  let attempts = 20;
+  let attempts = 0;
 
   function checkGuess() {
     const guess = parseInt(document.getElementById("guessInput").value);
     attempts++;
 
     if (guess === randomNumber) {
-      document.getElementById("message").innerHTML = `You did it! You correctly guessed the number! ${randomNumber} in ${attempts} attempts.`;
+      document.getElementById("message").innerHTML = `Congratulations! You correctly guessed the number (${randomNumber}) in ${attempts} attempts.`;
     } else if (guess < randomNumber) {
       document.getElementById("message").innerHTML = "Too low! Try again.";
     } else {
@@ -40,3 +57,6 @@ Guess the number 1-100
     }
   }
 </script>
+
+</body>
+</html>
