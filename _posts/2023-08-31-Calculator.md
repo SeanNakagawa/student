@@ -57,6 +57,12 @@ courses: { csse: {week: 2} }
         .button:hover {
             background-color: #286090;
         }
+        #clear:hover {
+        background-color: #c9302c; /* Darker red color on hover */
+    }
+        #equals:hover {
+        background-color: #449d44; /* Darker green color on hover */
+    }
     </style>
 </head>
 <body>
