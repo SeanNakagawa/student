@@ -37,6 +37,7 @@ courses: { csse: {week: 4} }
             <th>Total: <span id="total">0.0</span></th>
             <th>Count: <span id="count">0.0</span></th>
             <th>Average: <span id="average">0.0</span></th>
+            <th>Median: <span id="median">0.0</span></th>
         </tr>
         <tbody id="scores">
             <!-- JavaScript-generated input boxes will appear here -->
@@ -67,19 +68,40 @@ courses: { csse: {week: 4} }
             if (key === "Tab" || key === "Enter") {
                 event.preventDefault(); // Prevent default behavior (tabbing to the next element)
                 const scoreInputs = document.getElementsByName('score');
-                let total = 0;  // Running total
-                let count = 0;  // Count of input elements with valid values
+                let scoresArray = []; // Array to store valid scores
                 for (let i = 0; i < scoreInputs.length; i++) {
                     const value = parseFloat(scoreInputs[i].value);
                     if (!isNaN(value)) {
-                        total += value; // Add to running total
-                        count++;
+                        scoresArray.push(value); // Add valid scores to the array
                     }
                 }
-                // Update totals
-                document.getElementById('total').textContent = total.toFixed(2); // Show two decimals
-                document.getElementById('count').textContent = count;
-                document.getElementById('average').textContent = (count > 0) ? (total / count).toFixed(2) : "0.0";
+                 if (scoresArray.length > 0) {
+                    // Calculate total
+            let total = scoresArray.reduce((acc, current) => acc + current, 0);
+            // Calculate average
+            let average = total / scoresArray.length;
+            // Calculate median
+            scoresArray.sort((a, b) => a - b);
+            let median;
+            if (scoresArray.length % 2 === 0) {
+                const mid1 = scoresArray[scoresArray.length / 2 - 1];
+                const mid2 = scoresArray[scoresArray.length / 2];
+                median = (mid1 + mid2) / 2;
+            } else {
+                median = scoresArray[Math.floor(scoresArray.length / 2)];
+            }
+                // Update totals and median
+            document.getElementById('total').textContent = total.toFixed(2);
+            document.getElementById('count').textContent = scoresArray.length;
+            document.getElementById('average').textContent = average.toFixed(2);
+            document.getElementById('median').textContent = median.toFixed(2);
+        } else {
+            // If there are no valid scores, reset all values to zero
+            document.getElementById('total').textContent = "0.0";
+            document.getElementById('count').textContent = "0.0";
+            document.getElementById('average').textContent = "0.0";
+            document.getElementById('median').textContent = "0.0";
+        }
                 // Add a new input line
                 newInputLine(scoreInputs.length + 1);
             }

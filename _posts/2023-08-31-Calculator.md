@@ -35,7 +35,7 @@ courses: { csse: {week: 2} }
         }
         .button-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 5px;
         }
         .button {
@@ -68,33 +68,49 @@ courses: { csse: {week: 2} }
         <button class="button" onclick="appendToDisplay('2')">2</button>
         <button class="button" onclick="appendToDisplay('3')">3</button>
         <button class="button" onclick="appendToDisplay('+')">+</button>
+        <button class="button" onclick="appendToDisplay('e')">e</button>
         <button class="button" onclick="appendToDisplay('4')">4</button>
         <button class="button" onclick="appendToDisplay('5')">5</button>
         <button class="button" onclick="appendToDisplay('6')">6</button>
         <button class="button" onclick="appendToDisplay('-')">-</button>
+        <button class="button" onclick="appendToDisplay('Math.PI')">π</button>
         <button class="button" onclick="appendToDisplay('7')">7</button>
         <button class="button" onclick="appendToDisplay('8')">8</button>
         <button class="button" onclick="appendToDisplay('9')">9</button>
         <button class="button" onclick="appendToDisplay('*')">*</button>
+        <button class="button" onclick="appendToDisplay('/')">/</button>
         <button class="button" onclick="appendToDisplay('0')">0</button>
+        <button class="button" onclick="appendToDisplay('^')">^</button>
+        <button class="button" onclick="appendToDisplay('Math.sqrt(')">√</button>
         <button id="clear" onclick="clearDisplay()">C</button>
         <button id="equals" onclick="calculate()">=</button>
-        <button class="button" onclick="appendToDisplay('/')">/</button>
     </div>
 </div>
 
 <script>
+        const e = 2.71828183; // Define the variable 'e'
+
     function appendToDisplay(value) {
         document.getElementById("display").value += value;
     }
-
+    function appendToDisplay(value) {
+        if (value === 'e') {
+            document.getElementById("display").value += e;
+        } else {
+            document.getElementById("display").value += value;
+        }
+    }
     function clearDisplay() {
         document.getElementById("display").value = "";
     }
 
     function calculate() {
         try {
-            const result = eval(document.getElementById("display").value);
+            let expression = document.getElementById("display").value;
+            // Replace '^' with '**' for exponentiation
+            expression = expression.replace(/\^/g, '**');
+
+            const result = eval(expression);
             document.getElementById("display").value = result;
         } catch (error) {
             document.getElementById("display").value = "Error";
