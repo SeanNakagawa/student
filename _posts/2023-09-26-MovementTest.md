@@ -70,7 +70,7 @@ courses: { csse: {week: 5} }
                 // Initial position of the platform
                 this.position = {
                     x: 0,
-                    y: 0,
+                    y: 300,
                 }
                 this.image = image;
                 this.width = 650;
