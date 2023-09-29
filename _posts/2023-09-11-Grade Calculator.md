@@ -1,6 +1,6 @@
 ---
 toc: true
-comments: false
+comments: true
 layout: post
 title: Grade Calculator
 description: Calculates your grade and total points given your individual grades

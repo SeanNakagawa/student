@@ -1,6 +1,6 @@
 ---
 toc: true
-comments: false
+comments: true
 layout: post
 title: Mario Test
 description: Testing game
@@ -28,7 +28,7 @@ courses: { csse: {week: 5} }
         let c = canvas.getContext('2d');
         // Set the canvas dimensions
         canvas.width = 850;
-        canvas.height = 600;
+        canvas.height = 350;
         // Define gravity value
         let gravity = 1.5;
         // Define the Player class
@@ -36,7 +36,7 @@ courses: { csse: {week: 5} }
             constructor() {
                 // Initial position and velocity of the player
                 this.position = {
-                    x: 100,
+                    x: 300,
                     y: 200
                 };
                 this.velocity = {
@@ -73,27 +73,30 @@ courses: { csse: {week: 5} }
                     y: 300,
                 }
                 this.image = image;
-                this.width = 650;
-                this.height = 100;
+                this.width = 850;
+                this.height = 30;
             }
             // Method to draw the platform on the canvas
             draw() {
                 c.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
             }
         }
-        //--
-        // NEW CODE - DEFINE TUBE CLASS
-        //--
+        // Define the Tube class
         class Tube {
             constructor(image) {
                 // Initial position of the tube
                 this.position = {
-                    x: 500,
+                    x: 48,
                     y: 180
                 }
                 this.image = image;
-                this.width = 100;
-                this.height = 120;
+                // Define the hitbox dimensions (decrease the height by 75%)
+                this.hitbox = {
+                    x: this.position.x,
+                    y: this.position.y,
+                    width: 200, // Adjust the width of the hitbox
+                    height: 75 // Decrease the height of the hitbox by 75%
+                };
             }
             // Method to draw the tube on the canvas
             draw() {
@@ -102,17 +105,11 @@ courses: { csse: {week: 5} }
         }
         // Load images
         let image = new Image();
-        //--
-        // NEW CODE - ADD TUBE IMAGE
-        //--
         let imageTube = new Image();
         image.src = 'https://raw.githubusercontent.com/SeanNakagawa/student/main/images/floor1.png'
-        imageTube.src = 'https://samayass.github.io/samayaCSA/images/tube.png'
+        imageTube.src = 'https://raw.githubusercontent.com/SeanNakagawa/student/main/images/bed1.png'
         // Create platform and tube objects
         let platform = new Platform(image);
-        //--
-        // NEW CODE - CREATE TUBE OBJECT
-        //--
         let tube = new Tube(imageTube);
         // Create a player object
         player = new Player();
@@ -132,9 +129,6 @@ courses: { csse: {week: 5} }
             // Draw the platform, player, and tube
             platform.draw();
             player.update();
-            //--
-            // NEW CODE - DRAW TUBE
-            //--
             tube.draw();
             // Control player horizontal movement
             if (keys.right.pressed && player.position.x + player.width <= canvas.width - 50) {
@@ -153,15 +147,12 @@ courses: { csse: {week: 5} }
             ) {
                 player.velocity.y = 0;
             }
-            //--
-            // NEW CODE - TUBE COLLISIONS WITH PLAYER
-            //--
             // Check for collision between player and tube
             if (
-                player.position.y + player.height <= tube.position.y &&
-                player.position.y + player.height + player.velocity.y >= tube.position.y &&
-                player.position.x + player.width >= tube.position.x &&
-                player.position.x <= tube.position.x + tube.width
+                player.position.y + player.height <= tube.hitbox.y &&
+                player.position.y + player.height + player.velocity.y >= tube.hitbox.y &&
+                player.position.x + player.width >= tube.hitbox.x &&
+                player.position.x <= tube.hitbox.x + tube.hitbox.width
             ) {
                 player.velocity.y = 0;
                 player.position.y += 0.1;
@@ -170,43 +161,43 @@ courses: { csse: {week: 5} }
             }
             // Reset gravity and collision when not colliding with tube
             if (
-                player.position.y + player.height == tube.position.y + tube.height ||
-                player.position.y + player.height <= tube.position.y ||
-                player.position.x + player.width <= tube.position.x ||
-                player.position.x >= tube.position.x + tube.width
+                player.position.y + player.height == tube.hitbox.y + tube.hitbox.height ||
+                player.position.y + player.height <= tube.hitbox.y ||
+                player.position.x + player.width <= tube.hitbox.x ||
+                player.position.x >= tube.hitbox.x + tube.hitbox.width
             ) {
                 gravity = 1.5;
             }
             // Check for collision between player and tube from other sides
             if (
-                player.position.x + player.width <= tube.position.x &&
-                player.position.x + player.width + player.velocity.x >= tube.position.x &&
-                player.position.y + player.height >= tube.position.y &&
-                player.position.y <= tube.position.y + tube.height
+                player.position.x + player.width <= tube.hitbox.x &&
+                player.position.x + player.width + player.velocity.x >= tube.hitbox.x &&
+                player.position.y + player.height >= tube.hitbox.y &&
+                player.position.y <= tube.hitbox.y + tube.hitbox.height
             ) {
                 player.velocity.x = 0;
             }
             if (
-                player.position.x >= tube.position.x + tube.width &&
-                player.position.x + player.velocity.x <= tube.position.x + tube.width &&
-                player.position.y + player.height >= tube.position.y &&
-                player.position.y <= tube.position.y + tube.height
+                player.position.x >= tube.hitbox.x + tube.hitbox.width &&
+                player.position.x + player.velocity.x <= tube.hitbox.x + tube.hitbox.width &&
+                player.position.y + player.height >= tube.hitbox.y &&
+                player.position.y <= tube.hitbox.y + tube.hitbox.height
             ) {
                 player.velocity.x = 0;
             }
             if (
-                player.position.x >= tube.position.x &&
-                player.position.x + player.velocity.x <= tube.position.x &&
-                player.position.y + player.height >= tube.position.y &&
-                player.position.y <= tube.position.y + tube.height
+                player.position.x >= tube.hitbox.x &&
+                player.position.x + player.velocity.x <= tube.hitbox.x &&
+                player.position.y + player.height >= tube.hitbox.y &&
+                player.position.y <= tube.hitbox.y + tube.hitbox.height
             ) {
                 player.velocity.x = 0;
             }
             if (
-                player.position.x + player.width <= tube.position.x + tube.width &&
-                player.position.x + player.width + player.velocity.x >= tube.position.x + tube.width &&
-                player.position.y + player.height >= tube.position.y &&
-                player.position.y <= tube.position.y + tube.height
+                player.position.x + player.width <= tube.hitbox.x + tube.hitbox.width &&
+                player.position.x + player.width + player.velocity.x >= tube.hitbox.x + tube.hitbox.width &&
+                player.position.y + player.height >= tube.hitbox.y &&
+                player.position.y <= tube.hitbox.y + tube.hitbox.height
             ) {
                 player.velocity.x = 0;
             }

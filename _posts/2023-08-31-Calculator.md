@@ -1,6 +1,6 @@
 ---
 toc: true
-comments: false
+comments: true
 layout: post
 title: Basic Calculator
 description: Basic Calculator Test 
