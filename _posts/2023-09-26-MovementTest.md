@@ -2,8 +2,8 @@
 toc: true
 comments: true
 layout: post
-title: Mario Test
-description: Testing game
+title: Background/Platform Test
+description: To test the background and platform with movements
 type: hacks
 courses: { csse: {week: 5} }
 ---
