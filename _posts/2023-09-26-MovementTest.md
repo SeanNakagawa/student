@@ -125,11 +125,11 @@ courses: { csse: {week: 5} }
         // Animation function to continuously update and render the canvas
         function animate() {
             requestAnimationFrame(animate);
-            // Calculate the new scroll values based on player position
-            let scrollX = 0.4 * (player.position.x - canvas.width / 2);
-            let scrollY = 0.4 * (player.position.y - canvas.height / 2);
-            // Draw the background with the new scroll values
             c.clearRect(0, 0, canvas.width, canvas.height);
+            // Calculate the new scroll values based on player position
+            let scrollX = player.position.x - canvas.width / 2;
+            let scrollY = player.position.y - canvas.height / 2;
+            // Draw the background with the new scroll values
             c.drawImage(image, -scrollX, -scrollY, canvas.width, canvas.height);
             // Draw the platform, player, and tube
             platform.draw();
