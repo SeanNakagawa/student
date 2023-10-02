@@ -9,7 +9,7 @@ courses: { csse: {week: 5} }
 ---
 
 %%html
-<html>
+<html lang="en">
 <head>
     <style>
         #canvas {
@@ -74,7 +74,7 @@ courses: { csse: {week: 5} }
                 }
                 this.image = image;
                 this.width = 850;
-                this.height = 30;
+                this.height = 20;
             }
             // Method to draw the platform on the canvas
             draw() {
@@ -125,7 +125,12 @@ courses: { csse: {week: 5} }
         // Animation function to continuously update and render the canvas
         function animate() {
             requestAnimationFrame(animate);
+            // Calculate the new scroll values based on player position
+            let scrollX = 0.4 * (player.position.x - canvas.width / 2);
+            let scrollY = 0.4 * (player.position.y - canvas.height / 2);
+            // Draw the background with the new scroll values
             c.clearRect(0, 0, canvas.width, canvas.height);
+            c.drawImage(image, -scrollX, -scrollY, canvas.width, canvas.height);
             // Draw the platform, player, and tube
             platform.draw();
             player.update();
@@ -159,7 +164,7 @@ courses: { csse: {week: 5} }
                 player.velocity.y = 0.0001;
                 gravity = 0.2;
             }
-            // Reset gravity and collision when not colliding with tube
+            // Reset gravity and collision when not colliding with the tube
             if (
                 player.position.y + player.height == tube.hitbox.y + tube.hitbox.height ||
                 player.position.y + player.height <= tube.hitbox.y ||
