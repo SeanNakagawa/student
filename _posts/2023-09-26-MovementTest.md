@@ -3,7 +3,7 @@ toc: true
 comments: true
 layout: post
 title: Background/Platform Test
-description: To test the background and platform with movements
+description: To test the background and platform with movements along with introducing scrolling background.
 type: hacks
 courses: { csse: {week: 5} }
 ---
@@ -49,7 +49,7 @@ courses: { csse: {week: 5} }
             }
             // Method to draw the player on the canvas
             draw() {
-                c.fillStyle = 'red';
+                c.fillStyle = 'grey';
                 c.fillRect(this.position.x, this.position.y, this.width, this.height);
             }
             // Method to update the player position and velocity
