@@ -1,11 +1,10 @@
 ---
-comments: False
+comments: true
 layout: post
 title: Minigame Testing 5
 description: Add working elevator to second floor with interactivity
 type: hacks
-courses: {'compsci': {'week': 6}}
-categories: ['C4.1']
+courses: {'compsci': {'week': 7}}
 ---
 
 <style>
